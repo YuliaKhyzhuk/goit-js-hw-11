@@ -54,10 +54,20 @@ gallery-section {
   margin-bottom: 20px;
 }
 
-.gallery__item {
+.photo-card {
+  display: flex;
+  flex-direction: column;
   flex-basis: calc((100% - 120px) / 4);
   margin-left: 30px;
   margin-top: 30px;
+}
+
+.info {
+  display: flex;
+  /* flex-direction: column; */
+  flex-basis: calc((100% - 120px) / 4);
+  /* margin-left: 30px;
+  margin-top: 30px; */
 }
 
 .gallery-img {

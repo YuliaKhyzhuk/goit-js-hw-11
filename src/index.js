@@ -9,7 +9,7 @@ const galleryDivEl = document.querySelector('.gallery');
 const loadMoreBtnEl = document.querySelector('.load-more');
 
 const pixabayAPI = new PixabayAPI();
-console.log(pixabayAPI);
+// console.log(pixabayAPI);
 
 loadMoreBtnEl.classList.add('is-hidden');
 
@@ -48,7 +48,7 @@ const onSearchFormSubmit = async event => {
     }
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     galleryDivEl.innerHTML = createGalleryCards(data.hits);
-    console.log('data.hits:', data.hits);
+    // console.log('data.hits:', data.hits);
   } catch (err) {
     console.log(err);
   }
