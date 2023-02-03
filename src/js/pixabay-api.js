@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export class PixabayAPI {
-  static BASE_URL = 'https://pixabay.com/api/';
+  static BASE_URL = 'https://pixabay.com/';
   static API_KEY = '15090936-31f0088bbfe3b64ca1007e23b';
 
   constructor() {
@@ -14,7 +14,7 @@ export class PixabayAPI {
       params: {
         key: PixabayAPI.API_KEY,
         q: this.query,
-        image_type: photo,
+        image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
         page: this.page,
@@ -22,6 +22,6 @@ export class PixabayAPI {
       },
     };
 
-    return axios.get(`${PixabayAPI.BASE_URL}/search/photos`, searchParams);
+    return axios.get(`${PixabayAPI.BASE_URL}/api/`, searchParams);
   }
 }
