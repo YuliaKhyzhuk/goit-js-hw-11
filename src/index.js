@@ -1,8 +1,10 @@
-import './css/styles.css';
+// import './css/styles.css';
 import './css/gallery.css';
 import { PixabayAPI } from './js/pixabay-api.js';
 import { createGalleryCards } from './js/templates/gallery-cards.js';
 import Notiflix from 'notiflix';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const searchFormEl = document.querySelector('#search-form');
 const galleryDivEl = document.querySelector('.gallery');
@@ -10,7 +12,14 @@ const loadMoreBtnEl = document.querySelector('.load-more');
 
 const pixabayAPI = new PixabayAPI();
 
+let lightboxGallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 1000,
+});
+
 loadMoreBtnEl.classList.add('is-hidden');
+
+
 
 const onSearchFormSubmit = async event => {
   event.preventDefault();
@@ -31,7 +40,7 @@ const onSearchFormSubmit = async event => {
 
       event.target.reset();
 
-      galleryDivEl.innerHTML = '';
+      galleryDivEl.innerHTML = '';      
 
       loadMoreBtnEl.classList.add('is-hidden');
 
@@ -44,6 +53,9 @@ const onSearchFormSubmit = async event => {
 
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     galleryDivEl.innerHTML = createGalleryCards(data.hits);
+
+    lightboxGallery.on('show.simplelightbox');
+      lightboxGallery.refresh();
   } catch (err) {
     console.log(err);
   }
@@ -63,6 +75,10 @@ const onLoadMoreBtnClick = async event => {
       loadMoreBtnEl.classList.add('is-hidden');
     }
     galleryDivEl.insertAdjacentHTML('beforeend', createGalleryCards(data.hits));
+    
+    lightboxGallery.on('show.simplelightbox');
+    lightboxGallery.refresh();
+
   } catch (err) {
     console.log(err);
   }

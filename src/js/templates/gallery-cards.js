@@ -1,8 +1,7 @@
 export const createGalleryCards = cardsInfo => {
   const galleryCardArr = cardsInfo.map(el => {
-    // console.log(el);
     return `
-    <div class="photo-card">
+    <a href="${el.largeImageURL}" class="photo-link"><div class="photo-card">
       <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" class="gallery-img" />
       <div class="info">
         <p class="info-item">
@@ -18,10 +17,11 @@ export const createGalleryCards = cardsInfo => {
           <b>Downloads </b>${el.downloads}
         </p>
       </div>
-    </div>
+    </div></a>
           `;
   });
 
+  // Test
+
   return galleryCardArr.join('');
-  console.log('gallery');
 };
