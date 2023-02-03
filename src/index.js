@@ -18,6 +18,7 @@ const onSearchFormSubmit = async event => {
 
   pixabayAPI.query = event.target.elements.user_search_query.value.trim();
   //   console.log(pixabayAPI.query);
+
   pixabayAPI.page = 1;
 
   try {
@@ -25,8 +26,10 @@ const onSearchFormSubmit = async event => {
     // console.log('from fetch', response);
 
     const { data } = response;
+    // console.log('data.totalHits:', data.totalHits);
+
     // console.log('const data', data);
-    if (data.hits.length === 0) {
+    if (data.totalHits === 0) {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
@@ -40,10 +43,10 @@ const onSearchFormSubmit = async event => {
       return;
     }
 
-    if (data.hits.length > 10) {
+    if (data.totalHits > 40) {
       loadMoreBtnEl.classList.remove('is-hidden');
     }
-
+    Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     galleryDivEl.innerHTML = createGalleryCards(data.hits);
     console.log('data.hits:', data.hits);
   } catch (err) {
@@ -58,6 +61,12 @@ const onLoadMoreBtnClick = async event => {
     const response = await pixabayAPI.fetchPhotosByQuery();
     const { data } = response;
 
+    if (pixabayAPI.page === Math.ceil(data.totalHits / 40)) {
+      Notiflix.Notify.info(
+        `We're sorry, but you've reached the end of search results.`
+      );
+      loadMoreBtnEl.classList.add('is-hidden');
+    }
     galleryDivEl.insertAdjacentHTML('beforeend', createGalleryCards(data.hits));
   } catch (err) {
     console.log(err);
