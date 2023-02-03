@@ -6,16 +6,16 @@ export const createGalleryCards = cardsInfo => {
       <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" class="gallery-img" />
       <div class="info">
         <p class="info-item">
-          <b>Likes ${el.likes}</b>
+          <b>Likes </b>${el.likes}
         </p>
         <p class="info-item">
-          <b>Views ${el.views}</b>
+          <b>Views </b>${el.views} 
         </p>
         <p class="info-item">
-          <b>Comments ${el.comments}</b>
+          <b>Comments </b>${el.comments}
         </p>
         <p class="info-item">
-          <b>Downloads ${el.downloads}</b>
+          <b>Downloads </b>${el.downloads}
         </p>
       </div>
     </div>
