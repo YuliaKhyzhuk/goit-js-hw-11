@@ -11,12 +11,13 @@
   <body>
     <section class="gallery-section">
       <div class="container">
-        <form class="search-form js-search-form">
+        <form class="search-form" id="search-form">
           <input
             type="text"
             name="user_search_query"
             class="search-input"
-            required
+            autocomplete="off"
+            placeholder="Search images..."
           />
           <button type="submit" class="search-btn">search</button>
         </form>
